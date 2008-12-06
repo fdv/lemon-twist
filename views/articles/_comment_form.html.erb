@@ -1,0 +1,51 @@
+<div id="comment-form-box" class="box">
+  <div class="one-col box-top">
+    <h3 class="box-title"><%= _("Leave a comment") %></h3>
+  </div>
+  <div class="one-col box-body">
+    <p class="comment-guidelines">All fields marked with "*" are required.</p>
+
+    <% form_remote_tag :url      => comments_path(@article),
+                      :position => :bottom,
+                      :update   => {:success => 'user-comments'},
+                      :loading  => "loading()",
+                      :complete => "complete(request)",
+                      :failure  => "failure(request)",
+                      :html     => {:id => 'commentform' } \
+    do %>
+    <p>
+    	<label for="comment_author"><%= _("Name %s", "*") %></label>
+    	<%= text_field "comment", "author", :cols => 22 %> 
+    </p>
+    <p>
+    	<label for="comment_email"><%= _("Email")%> <%= content_tag('small', "(#{link_to('gravatar', 'http://gravatar.com')} "+ _("enabled") + ")") if this_blog.use_gravatar %> *</label>
+    	<%= text_field "comment", "email" %>
+    </p>
+    <p>
+    	<label><%= _("Website")%></label>
+    	<%= text_field "comment", "url" %>
+    </p>
+
+    <p>
+      <label>
+        <%= _("Comments")%>:
+        <%= content_tag('small', link_to(_("Textile enabled"), "http://hobix.com/textile/")) if this_blog.comment_text_filter.include? 'textile' %>
+        <%= content_tag('small', link_to(_("Markdown enabled"), "http://daringfireball.net/projects/markdown/")) if this_blog.comment_text_filter.include? 'markdown' %>
+        <br />
+      </label>
+      <%= text_area 'comment', 'body', :rows => 10, :cols => 25 %>
+    </p>
+    <p class="buttons">
+      <%= submit_to_remote('preview', _('Preview') + '!',
+                           :update => 'preview',
+                           :complete => "Element.show('preview')",
+                           :url    => preview_new_comment_path(@article),
+    											 :html => {:class => 'submit', :id => 'form-preview-button'}) %>
+      <%= submit_tag _('Submit'), :id => 'form-submit-button', :class => 'submit', :onclick => "$('commentform').onsubmit();this.disabled=true;Element.hide('preview');return false;" %>
+      <%= image_tag '/images/theme/spinner.gif', :id => 'comment_loading', :style => 'display:none' %>
+    </p>
+  	
+    <% end %>
+  </div>
+  <div class="one-col box-bottom"></div>    
+</div>

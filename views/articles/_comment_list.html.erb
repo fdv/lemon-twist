@@ -1,0 +1,6 @@
+<div id="user-comments">
+  <% if @article.published_comments.any? -%>
+    <%= render(:partial => "comment", :collection => @article.published_comments) %>
+  <% end -%>
+  <div id="preview" style="display: none;"></div>
+</div>

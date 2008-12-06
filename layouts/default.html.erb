@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title><%=h page_title %></title>
+  <%= page_header %>
+  <%= stylesheet_link_tag '/stylesheets/theme/style.css', :media => 'all' %>
+  <%= stylesheet_link_tag '/stylesheets/theme/legacy.css', :media => 'all' %>
+</head>
+
+<body>
+  <div id="wrapper">
+    <!-- start header -->
+    <div id="header">
+      <h1 id="logo"><%= h this_blog.blog_name %></h1>
+      <div id="global-nav">
+        <ul>
+          <li class="page_item <%= 'current_page_item' unless (controller.action_name == 'view_page' and id == 'about') or (controller.action_name == 'archives')%>"> 
+            <%= link_to _("Home"), this_blog.base_url %>
+          </li>
+          <li class="page_item <%= 'current_page_item' if controller.action_name == 'archives' %>">
+            <%= link_to _("Archives"), :controller => 'articles', :action => 'archives' %>
+          </li>
+          <li class="page_item <%= 'current_page_item' if controller.action_name == 'view_page' and id == 'about'%>">
+            <%= link_to _("About"), :controller => 'articles', :action => 'view_page', :id => 'about' %>
+          </li>
+        </ul>
+      </div>
+      <div class="clear"></div>
+    </div>
+    <!-- end header -->
+
+    <div id="main-content">
+    <div id="content-container-left">
+      <div id="author-block">
+        <div id="author-block-dialog">
+          <p>
+            <strong><%= this_blog.blog_name%></strong>: 
+            Insert here a brief description of your blog, or yourself -- whichever. 
+            <%= link_to _("Read More"), :controller => 'articles', :action => 'view_page', :id => 'about' %>
+          </p>
+        </div>
+      </div>
+      <%= @content_for_layout %>
+      <%= javascript_tag 'show_dates_as_local_time()' %>
+    </div>
+    <div id="content-container-right">
+      <!-- search -->
+      <%= render :partial => 'shared/search' %>
+
+      <!-- sidebar components -->
+      <%= render_sidebars %>
+    </div>
+    <div id="frame-grass"></div>
+
+    <% if controller.controller_name == "articles" and controller.action_name == "show" %>    
+      <div id="main-lower-content">
+        <div id="lower-content-container">
+          <% if @article.allow_comments? or @article.published_comments.size > 0 -%>
+            <h3 id="lower-content-title"><%= _("Comments")%></h3>
+            <%= render :partial => "comment_list" %>
+          <% end -%>
+
+          <%= render :partial => 'comment_form' if @article.allow_comments? %>
+        </div>
+        <div class="clear"></div>
+      </div>
+    <% end %>
+    <div class="clear"></div>
+  </div>
+    <div id="main-footer">
+      <p>
+        <strong><%= this_blog.blog_name %></strong> is the property of [your_name_here]. Any views and opinions expressed herein are those of the author(s) only. All trademarks, slogans, text or logo represented, used, or referred to in this site are the property of their respective owners.
+      </p>
+    </div>
+    <div id="main-copyright">
+      <div class="left">© Copryright 2007 <%= this_blog.blog_name %>. All Rights Reserved.</div>
+      <div class="right"></div>
+    </div>
+  </div>
+</body>
+</html>
+

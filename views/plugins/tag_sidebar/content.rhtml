@@ -1,0 +1,15 @@
+<% unless sidebar.tags.blank? %>
+<div class="box">
+  <div class="one-col box-top">
+    <h3 class="box-title"><%= _("Tags") %></h3>
+  </div>
+  <div class="one-col box-body">
+    <p style="overflow:hidden; padding: 15px 20px 0pt;">
+    <% sidebar.tags.each do |tag| -%>
+    <span style="font-size:<%= sidebar.sizes[tag] %>%"><%= link_to tag.display_name, tag_url(tag) %></span>
+    <% end -%>
+    </p>
+  </div>
+  <div class="one-col box-bottom"></div>
+</div>
+<% end %>

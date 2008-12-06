@@ -1,0 +1,4 @@
+<% @counter = 1 %>
+<%= render :partial => 'articles/article', :collection => @articles %>
+
+<%= will_paginate @articles %>

@@ -1,0 +1,21 @@
+<div id="search" class="box">
+  <div class="one-col box-top">
+    <h3 class="box-title"><%= _("Syndicate")%></h3>
+  </div>
+  <div id="blogfeeds" class="one-col box-body">
+    <ul class="ul-listing feeds">
+      <% if articles? -%>
+      <li><a href="<%= url_for :controller=>'xml', :action=>'feed', :format => format, :type => 'feed' %>" title="Articles feed"><%= _("Articles")%></a></li>
+      <% end %>
+      <% if comments? -%>
+      <li><a href="<%= url_for :controller=>'xml', :action=>'feed', :format => format, :type => 'comments' %>" title="Comments feed"><%= _("Comments")%></a></li>
+      <% end %>
+      <% if trackbacks? -%>
+      <li><a href="<%= url_for :controller=>'xml', :action=>'feed', :format => format, :type => 'trackbacks' %>" title="Trackbacks feed"><%= _("Trackbacks")%></a></li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="one-col box-bottom"></div>
+</div>
+
+

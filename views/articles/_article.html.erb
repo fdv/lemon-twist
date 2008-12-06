@@ -1,0 +1,56 @@
+<% if (@counter and @counter == 1) %>
+<div class="main-entry" id="article-<%= article.id %>">
+  <h2 class="title"><%= article.title %></h2>
+  <div class="meta-top">
+    <strong><%= js_distance_of_time_in_words_to_now article.published_at %></strong> |
+    <%= _("Author") + " #{author_link(article)}" %> | 
+    <%= category_links(article) %>
+  </div>
+  <div class="excerpt">
+    <%= article.html(:body) %>
+  </div>
+  <% if article.extended? -%>
+    <%= article.html(:extended) %>
+  <% end -%>
+
+  <div class="meta-bottom-home">
+    <span class="comments">
+      <%= link_to_permalink(article, "#{article.published_comments.size} #{pluralize(article.published_comments.
+      size, 'commentaire', 'commentaire', 'commentaires')}" ,'commentaires', '',  'nofollow') %>
+    </span>
+    <span class="permalink">
+      <%= link_to_permalink(article, _("Permalink"))%>
+    </span>
+    <img class="fff" longdesc="http://www.farfromfearless.com" alt="farfromfearless" src="http://localhost/wp-content/themes/Lemon_Twist/images/icon_fff.png"/>
+  </div>
+</div>
+<% else %>
+<div class="entry" id="article-<%= article.id %>">
+  <div class="date">
+    <span class="month-year"><%= article.published_at.strftime('%b %Y') %></span>
+    <span class="day"><%= article.published_at.strftime('%d') %></span>
+  </div>
+  <div class="entry-content">
+    <h3><%= link_to_permalink(article, article.title) %></h3>
+    <%= article.html(:body) %>
+
+    <% if article.extended? -%>
+        <% unless controller.action_name == 'index' -%>
+          <%= article.html(:extended) %>
+        <% end -%>
+    <% end -%>
+    <div class="meta-bottom">
+      <span class="comments">
+        <%= link_to_permalink(article, "#{article.published_comments.size} #{pluralize(article.published_comments.
+        size, 'commentaire', 'commentaire', 'commentaires')}" ,'commentaires', '',  'nofollow') %>
+      </span>
+      <span class="tags">
+        <%= tag_links(article) unless article.tags.empty? %>
+      </span>
+    </div>
+  </div>
+</div>
+
+<% end %>
+
+<% if @counter && @counter == 1 ; @counter = 0 ; end %>

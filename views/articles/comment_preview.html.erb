@@ -1,0 +1,17 @@
+<div class="user-comments-box" id="comment-<%= comment.id %>">
+  <div class="user-comments-avatar">
+    <%= gravatar_tag(@comment.email) if this_blog.use_gravatar and @comment.email %>
+  </div>
+  <div class="user-comments-dialogpoint"></div>
+  <div class="box">
+    <div class="box-top"></div>
+    <div class="box-body">
+      <h3 class="comment-title">
+        <%= (@comment.url.blank?) ? h(@comment.author) : link_to(h(@comment.author), @comment.url) %> <%= _("is about to say") %>
+      </h3>
+      <%= @comment.html %>
+    </div>
+    <div class="box-bottom"></div>
+  </div>
+  <div class="clear">
+</div>

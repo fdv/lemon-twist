@@ -1,0 +1,46 @@
+@charset "utf-8";
+/* These are legacy styles intended to support postings with formatting proprietary to the Lemon Lime theme. */
+
+/* Image Container with link
+-------------------------------*/
+#image_container {
+	margin: 15px auto 15px auto; padding: 4px;
+	overflow:hidden;
+
+	border-top: 1px solid #ebebeb;
+	border-right: 1px solid #cacaca;
+	border-bottom: 1px solid #cacaca;
+	border-left: 1px solid #ebebeb;
+	
+	background-color: #ffffff;
+}
+
+#image_container img {
+	margin: auto; padding: o;
+	border-bottom: 1px solid #82909c;
+	background: #c4cbd2;
+}
+
+#image_container p {
+	display: block;
+	padding: 20px 5px 2px 20px;
+	color: #c4cbd2;
+	background-color:#5b656e;
+}
+
+#image_container a {
+	display: block;
+	padding: 2px 5px 2px 20px;
+	color: #c4cbd2;
+	
+	background: transparent url(images/link_arrow.png) no-repeat 5px 50%;
+	background-color:#5b656e;
+
+	text-decoration: none;
+
+}
+
+#image_container a:hover{
+	color: #ffffff;
+	text-decoration: underline;
+}
