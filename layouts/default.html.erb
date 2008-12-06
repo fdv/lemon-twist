@@ -21,7 +21,7 @@
             <%= link_to _("Archives"), :controller => 'articles', :action => 'archives' %>
           </li>
           <li class="page_item <%= 'current_page_item' if controller.action_name == 'view_page' and id == 'about'%>">
-            <%= link_to _("About"), :controller => 'articles', :action => 'view_page', :id => 'about' %>
+            <%= link_to _("About"), :controller => 'articles', :action => 'view_page', :name => 'about' %>
           </li>
         </ul>
       </div>
